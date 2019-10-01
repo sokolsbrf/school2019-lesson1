@@ -1,7 +1,44 @@
 <resources>
     <string name="app_name">RuPasswords</string>
+    <string name="activity_title">Русские пароли</string>
 
-    <string name="enter_password">Введите свой пароль на русском</string>
+    <string name="enter_password">Здесь вы можете посмотреть свой пароль, созданный по методу «русское слово в английской раскладке»</string>
+    <string name="enter_password_hint">(русский пароль)</string>
+
+    <string name="generate_password">Сгенерируйте новый пароль ему на замену</string>
+
+    <string name="password_strength">Сила этого пароля:</string>
+
+    <string name="check_use_caps">Заглавные</string>
+    <string name="check_use_digits">Цифры</string>
+    <string name="check_use_symbols">Спецсимволы</string>
+    <string name="button_generate">Генерировать</string>
+
+    <string name="clip_title">Пароль</string>
+
+    <string name="length_format">Длина: 8 + %1$d %2$s = %3$d %4$s</string>
+
+    <plurals name="symbols_count">
+        <item quantity="one">символ</item>
+        <item quantity="two">символа</item>
+        <item quantity="few">символа</item>
+        <item quantity="many">символов</item>
+        <item quantity="other">символов</item>
+    </plurals>
+
+    <string-array name="strengths">
+        <item>(сила пароля)</item>
+        <item>Ужасный</item>
+        <item>Очень плохой</item>
+        <item>Плохой</item>
+        <item>Слабый</item>
+        <item>Слабоватый</item>
+        <item>Нормальный</item>
+        <item>Лучше среднего</item>
+        <item>Хороший</item>
+        <item>Очень хороший</item>
+        <item>Отличный</item>
+    </string-array>
 
     <string-array name="russians">
         <item>й</item>

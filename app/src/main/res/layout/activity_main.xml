@@ -1,37 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_padding"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/enter_password"
-        android:textAppearance="@android:style/TextAppearance.Medium"
-        />
+        android:orientation="vertical"
+        android:padding="@dimen/activity_padding"
+        tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/text_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/ResultTextAppearance"
-        android:layout_marginTop="@dimen/result_margin"
-        android:layout_marginBottom="@dimen/result_margin"
-        tools:text="Result"
-        style="@style/ResultTextView" />
 
-    <EditText
-        android:id="@+id/edit_source"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        tools:text="Русский пароль"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_password"
+            android:textAppearance="@style/CaptionTextAppearance"
+            />
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/result_text_background"
+            android:layout_marginTop="@dimen/activity_padding"
+            android:layout_marginBottom="@dimen/activity_padding"
+            >
+
+            <TextView
+                android:id="@+id/text_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/ResultTextAppearance"
+                android:layout_marginTop="@dimen/result_margin"
+                android:layout_marginBottom="@dimen/result_margin"
+                android:layout_weight="1"
+                tools:text="Result"
+                style="@style/ResultTextView" />
+
+            <ImageButton
+                android:id="@+id/button_copy_ru_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_content_copy_white_24dp"
+                android:enabled="false"
+                android:padding="@dimen/activity_padding"
+                />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edit_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/enter_password_hint"
+            android:imeOptions="flagNoExtractUi"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/password_strength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/image_password_strength"
+                tools:text="Очень слабый"
+                />
+
+            <ImageView
+                android:id="@id/image_password_strength"
+                android:layout_width="96dp"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/password_strength" />
+
+        </RelativeLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/section_spacing" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/generate_password"
+            android:layout_marginBottom="@dimen/checkbox_margin"
+            android:textAppearance="@style/CaptionTextAppearance"
+            />
+
+        <CheckBox
+            android:id="@+id/check_caps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/check_use_caps"
+            android:layout_marginTop="@dimen/checkbox_margin"
+            android:textAppearance="@style/CaptionTextAppearance"
+            android:checked="true"
+            />
+
+        <CheckBox
+            android:id="@+id/check_digits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/check_use_digits"
+            android:layout_marginTop="@dimen/checkbox_margin"
+            android:textAppearance="@style/CaptionTextAppearance"
+            android:checked="true"
+            />
+
+        <CheckBox
+            android:id="@+id/check_symbols"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/check_use_symbols"
+            android:layout_marginTop="@dimen/checkbox_margin"
+            android:layout_marginBottom="@dimen/checkbox_margin"
+            android:textAppearance="@style/CaptionTextAppearance"
+            />
+
+        <SeekBar
+            android:id="@+id/seek_password_length"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            />
+
+        <TextView
+            android:id="@+id/text_password_length"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/activity_padding"
+            android:background="@drawable/result_text_background"
+            >
+
+            <TextView
+                android:id="@+id/text_generated"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/ResultTextAppearance"
+                android:layout_marginTop="@dimen/result_margin"
+                android:layout_marginBottom="@dimen/result_margin"
+                android:layout_weight="1"
+                tools:text="Generated"
+                style="@style/ResultTextView" />
+
+            <ImageButton
+                android:id="@+id/button_copy_generated_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_content_copy_white_24dp"
+                android:enabled="false"
+                android:padding="@dimen/activity_padding"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_generate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_generate" />
+
+    </LinearLayout>
+</ScrollView>
