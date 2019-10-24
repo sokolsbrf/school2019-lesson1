@@ -1,9 +1,5 @@
 package ru.dimasokol.learning.rupasswords;
 
-import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
+public class MainActivity extends FragmentActivity implements PasswordsApp {
 
     public static final int MIN_LENGTH = 8;
     private EditText sourceEditText;
-    private TextView resultTextView;
     private TextView strengthTextView;
     private TextView lengthTextView;
     private TextView generatedTextView;
@@ -27,8 +25,6 @@ public class MainActivity extends Activity {
 
     private SeekBar seekPasswordLength;
 
-    private View copyPasswordButton;
-    private View copyNewPasswordButton;
     private View generateButton;
 
     private CompoundButton digitsCheck, capsCheck, symbolsCheck;
@@ -43,14 +39,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         sourceEditText = findViewById(R.id.edit_source);
-        resultTextView = findViewById(R.id.text_result);
         strengthTextView = findViewById(R.id.password_strength);
         generatedTextView = findViewById(R.id.text_generated);
         lengthTextView = findViewById(R.id.text_password_length);
         strengthImageView = findViewById(R.id.image_password_strength);
 
-        copyPasswordButton = findViewById(R.id.button_copy_ru_password);
-        copyNewPasswordButton = findViewById(R.id.button_copy_generated_password);
         generateButton = findViewById(R.id.button_generate);
 
         digitsCheck = findViewById(R.id.check_digits);
@@ -64,25 +57,8 @@ public class MainActivity extends Activity {
 
         helper = new PasswordsHelper(russians, latins);
 
-        copyPasswordButton.setEnabled(false);
-        copyNewPasswordButton.setEnabled(false);
-
-        copyPasswordButton.setOnClickListener(view -> {
-            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            clipboardManager.setPrimaryClip(
-                    ClipData.newPlainText(getString(R.string.clip_title), resultTextView.getText().toString())
-            );
-        });
-
-        copyNewPasswordButton.setOnClickListener(view -> {
-            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            clipboardManager.setPrimaryClip(
-                    ClipData.newPlainText(getString(R.string.clip_title), generatedTextView.getText().toString())
-            );
-        });
-
         generateButton.setOnClickListener(view -> {
-            generatedTextView.setText(helper.generatePassword(MIN_LENGTH + seekPasswordLength.getProgress(),
+            showGeneratedPassword(helper.generatePassword(MIN_LENGTH + seekPasswordLength.getProgress(),
                     capsCheck.isChecked(), digitsCheck.isChecked(), symbolsCheck.isChecked()));
         });
 
@@ -111,8 +87,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                copyPasswordButton.setEnabled(charSequence.length() > 0);
-                resultTextView.setText(helper.convert(charSequence));
+                showTranslatedPassword(helper.convert(charSequence));
                 updateStrengthInfo();
             }
 
@@ -139,5 +114,25 @@ public class MainActivity extends Activity {
         int strength = helper.detectStrength(password);
         strengthTextView.setText(getResources().getStringArray(R.array.strengths)[strength]);
         strengthImageView.getDrawable().setLevel(strength * 1000);
+    }
+
+    @Override
+    public void showTranslatedPassword(String password) {
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentByTag(getString(R.string.translated_tag));
+
+        if (fragment instanceof PasswordHolder) {
+            ((PasswordHolder) fragment).showPassword(password);
+        }
+    }
+
+    @Override
+    public void showGeneratedPassword(String password) {
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentByTag(getString(R.string.generated_tag));
+
+        if (fragment instanceof PasswordHolder) {
+            ((PasswordHolder) fragment).showPassword(password);
+        }
     }
 }

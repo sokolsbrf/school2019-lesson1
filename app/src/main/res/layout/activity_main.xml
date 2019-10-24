@@ -20,37 +20,11 @@
             android:textAppearance="@style/CaptionTextAppearance"
             />
 
-        <LinearLayout
+        <fragment
+            android:tag="translated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/result_text_background"
-            android:layout_marginTop="@dimen/activity_padding"
-            android:layout_marginBottom="@dimen/activity_padding"
-            >
-
-            <TextView
-                android:id="@+id/text_result"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/ResultTextAppearance"
-                android:layout_marginTop="@dimen/result_margin"
-                android:layout_marginBottom="@dimen/result_margin"
-                android:layout_weight="1"
-                tools:text="Result"
-                style="@style/ResultTextView" />
-
-            <ImageButton
-                android:id="@+id/button_copy_ru_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_content_copy_white_24dp"
-                android:enabled="false"
-                android:padding="@dimen/activity_padding"
-                />
-
-        </LinearLayout>
+            class="ru.dimasokol.learning.rupasswords.PasswordFragment" />
 
         <EditText
             android:id="@+id/edit_source"
@@ -142,36 +116,11 @@
             android:ellipsize="marquee"
             />
 
-        <LinearLayout
+        <fragment
+            android:tag="generated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/activity_padding"
-            android:background="@drawable/result_text_background"
-            >
-
-            <TextView
-                android:id="@+id/text_generated"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/ResultTextAppearance"
-                android:layout_marginTop="@dimen/result_margin"
-                android:layout_marginBottom="@dimen/result_margin"
-                android:layout_weight="1"
-                tools:text="Generated"
-                style="@style/ResultTextView" />
-
-            <ImageButton
-                android:id="@+id/button_copy_generated_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_content_copy_white_24dp"
-                android:enabled="false"
-                android:padding="@dimen/activity_padding"
-                />
-
-        </LinearLayout>
+            class="ru.dimasokol.learning.rupasswords.PasswordFragment" />
 
         <Button
             android:id="@+id/button_generate"

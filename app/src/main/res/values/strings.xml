@@ -17,6 +17,8 @@
     <string name="clip_title">Пароль</string>
 
     <string name="length_format">Длина: 8 + %1$d %2$s = %3$d %4$s</string>
+    <string name="generated_tag">generated</string>
+    <string name="translated_tag">translated</string>
 
     <plurals name="symbols_count">
         <item quantity="one">символ</item>
